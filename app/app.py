@@ -50,10 +50,21 @@ def main():
 
         prediction = model.predict(input_data)[0]
 
-        if prediction == 1:
-            st.success("Free parking spot likely available 🚗")
+        probability = model.predict_proba(input_data)[0][1]
+
+        st.subheader("Prediction result")
+
+        st.metric(
+            "Chance of free parking",
+            f"{probability * 100:.1f}%"
+        )
+
+        if probability > 0.6:
+            st.success("Parking should be easy to find 🚗")
+        elif probability > 0.4:
+            st.warning("Parking might be limited ⚠️")
         else:
-            st.error("Parking may be difficult to find ❌")
+            st.error("Parking will likely be difficult ❌")
 
 
 if __name__ == "__main__":
