@@ -24,7 +24,7 @@ def generating_parking_data(n_samples = 40000):
 
     probability = np.clip(probability, 0.05, 0.95)
 
-    df["Parking available"] = np.random.binomial(1, probability)
+    df["parking_available"] = np.random.binomial(1, probability)
 
     return df
 
